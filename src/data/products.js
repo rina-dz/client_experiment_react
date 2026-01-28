@@ -1,5 +1,6 @@
 export const products = [
   {
+    id: 1,
     name: "Электрическая морозильная поверхность Bosch PKE645BB2E",
     vendor: "Bosch",
     sku: "10154631",
@@ -11,6 +12,7 @@ export const products = [
     hot_sale: false,
   },
   {
+    id: 2,
     name: "Вытяжка телескопическая KRONA KAMILLA 600 2DN черный/черный",
     vendor: "KAMILLA",
     sku: "75698360",
@@ -22,6 +24,7 @@ export const products = [
     hot_sale: true,
   },
   {
+    id: 3,
     name: "Электрический духовой шкаф Gorenje BO58737E06B черный",
     vendor: "Gorenje",
     sku: "30960597",
@@ -33,6 +36,7 @@ export const products = [
     hot_sale: false,
   },
   {
+    id: 4,
     name: "Холодильник с морозильником Aceline B16AMO балый",
     vendor: "Aceline",
     sku: "56797097",
@@ -44,6 +48,7 @@ export const products = [
     hot_sale: false,
   },
   {
+    id: 5,
     name: "Винный шкаф Cellar Private CP043-2TBH черный",
     vendor: "Cellar",
     sku: "97866668",
@@ -55,6 +60,7 @@ export const products = [
     hot_sale: true,
   },
   {
+    id: 6,
     name: "Ледогенератор Kitfort KT-1819",
     vendor: "Kitfort",
     sku: "111876525",

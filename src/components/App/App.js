@@ -1,10 +1,16 @@
+import { useState } from 'react';
 import ProductTable from '../ProductTable/ProductTable';
-import { products } from '../../data/products';
+import { products as initialProducts } from '../../data/products';
 
 function App() {
+  const [products, setProducts] = useState(initialProducts);
+
   return (
     <div>
-      <ProductTable products={products} />
+      <ProductTable 
+        products={products} 
+        onProductsChange={setProducts} 
+      />
     </div>
   );
 }

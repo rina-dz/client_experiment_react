@@ -36,7 +36,7 @@ export const tableRowSx = {
 
 export const tableCellSx = (width, textAlign = "left") => ({
   height: "46px",
-  padding: "14px 16px",
+  padding: 0,
   textAlign,
   width,
   boxSizing: "border-box",
