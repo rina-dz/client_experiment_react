@@ -1,9 +1,79 @@
-import './App.css';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import ProductTable from '../ProductTable/ProductTable';
+
+const products = [
+  {
+    name: "Электрическая морозильная поверхность Bosch PKE645BB2E",
+    vendor: "Bosch",
+    sku: "10154631",
+    price: 39750.24,
+    price_with_delivery: 38750.24,
+    availability: 3,
+    multiplicity: 10,
+    sale: true,
+    hot_sale: false,
+  },
+  {
+    name: "Вытяжка телескопическая KRONA KAMILLA 600 2DN черный/черный",
+    vendor: "KAMILLA",
+    sku: "75698360",
+    price: 23500.12,
+    price_with_delivery: 23500.12,
+    availability: 3,
+    multiplicity: 3,
+    sale: false,
+    hot_sale: true,
+  },
+  {
+    name: "Электрический духовой шкаф Gorenje BO58737E06B черный",
+    vendor: "Gorenje",
+    sku: "30960597",
+    price: 12800.00,
+    price_with_delivery: 12800.00,
+    availability: 1,
+    multiplicity: 5,
+    sale: true,
+    hot_sale: false,
+  },
+  {
+    name: "Холодильник с морозильником Aceline B16AMO балый",
+    vendor: "Aceline",
+    sku: "56797097",
+    price: 54645.98,
+    price_with_delivery: 54645.98,
+    availability: 2,
+    multiplicity: 94,
+    sale: false,
+    hot_sale: false,
+  },
+  {
+    name: "Винный шкаф Cellar Private CP043-2TBH черный",
+    vendor: "Cellar",
+    sku: "97866668",
+    price: 48652.00,
+    price_with_delivery: 48652.00,
+    availability: 1,
+    multiplicity: 2,
+    sale: false,
+    hot_sale: true,
+  },
+  {
+    name: "Ледогенератор Kitfort KT-1819",
+    vendor: "Kitfort",
+    sku: "111876525",
+    price: 88000.00,
+    price_with_delivery: 88000.00,
+    availability: 2,
+    multiplicity: 1,
+    sale: false,
+    hot_sale: false,
+  }
+];
+
 
 function App() {
   return (
-    <div className="App">
+    <div>
+      <ProductTable products={products} />
     </div>
   );
 }
