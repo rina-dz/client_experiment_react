@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import sale_icon from "../../images/sale.svg";
 import hot_sale_icon from "../../images/hot_sale.svg";
 import add_icon from "../../images/add.svg";
@@ -37,6 +37,7 @@ export const useProductTable = (products, onProductsChange) => {
     const [sortOrder, setSortOrder] = useState('asc');
     const [editingCell, setEditingCell] = useState(null);
     const [editValue, setEditValue] = useState('');
+    const [selectedRowId, setSelectedRowId] = useState(null);
 
     const handleHeaderClick = (field) => {
         if (!sortableFields.includes(field)) return;
@@ -88,6 +89,25 @@ export const useProductTable = (products, onProductsChange) => {
         if (e.key === 'Enter') saveEditing();
         else if (e.key === 'Escape') setEditingCell(null);
     };
+
+    const handleRowClick = (productId) => {
+        setSelectedRowId(productId);
+    };
+
+    const clearSelection = () => {
+        setSelectedRowId(null);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = () => {
+            clearSelection();
+        };
+
+        document.addEventListener('click', handleClickOutside);
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
 
     const renderCell = (product, field) => {
         const isEditing = editingCell?.productId === product.id && editingCell?.field === field;
@@ -262,5 +282,8 @@ export const useProductTable = (products, onProductsChange) => {
         setEditValue,
         handleKeyDown,
         isEditable: (field) => editableFields.includes(field),
+        selectedRowId,
+        handleRowClick,
+        clearSelection,
     };
 };
