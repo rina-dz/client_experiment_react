@@ -10,9 +10,11 @@ import {
   Box,
 } from "@mui/material";
 import { MoreVert as MoreVertIcon } from "@mui/icons-material";
+
 import sale_icon from "../../images/sale.svg";
 import hot_sale_icon from "../../images/hot_sale.svg";
 import add_icon from "../../images/add.svg";
+
 import { availabilityIcons } from "../../data/availabilityIcons";
 
 import {
@@ -25,6 +27,8 @@ import {
   tableSx,
   headerRowSx,
 } from "./ProductTableStyles";
+
+import { useProductTable } from "./ProductTableController";
 
 const FormatPrice = ({ value }) => {
   const [integerPart, decimalPart] = Number(value).toFixed(2).split(".");
@@ -56,6 +60,9 @@ const FormatPrice = ({ value }) => {
 };
 
 const ProductTable = ({ products }) => {
+  const { sortedProducts, sortBy, sortOrder, sortProductsByClick } =
+    useProductTable(products);
+
   const headers = [
     { id: "name", label: "Наименование", align: "left" },
     { id: "vendor", label: "Вендор", align: "left" },
@@ -83,14 +90,28 @@ const ProductTable = ({ products }) => {
                 <TableCell
                   key={header.id}
                   sx={tableHeaderCellSx(header, columnWidths)}
+                  onClick={() => sortProductsByClick(header.id)}
                 >
                   {header.label}
+                  {sortBy === header.id && (
+                    <Box
+                      component="span"
+                      sx={{
+                        ml: 0.5,
+                        fontSize: "10px",
+                        verticalAlign: "top",
+                        color: "rgba(153, 153, 153, 1)",
+                      }}
+                    >
+                      {sortOrder === "asc" ? "↑" : "↓"}
+                    </Box>
+                  )}
                 </TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {products.map((product, index) => (
+            {sortedProducts.map((product, index) => (
               <TableRow key={index} sx={tableRowSx}>
                 <TableCell sx={tableCellSx(columnWidths.name, "left")}>
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -155,10 +176,14 @@ const ProductTable = ({ products }) => {
                 <TableCell sx={tableCellSx(columnWidths.price, "right")}>
                   <FormatPrice value={product.price} />
                 </TableCell>
-                <TableCell sx={tableCellSx(columnWidths.price_with_delivery, "right")}>
+                <TableCell
+                  sx={tableCellSx(columnWidths.price_with_delivery, "right")}
+                >
                   <FormatPrice value={product.price_with_delivery} />
                 </TableCell>
-                <TableCell sx={tableCellSx(columnWidths.availability, "center")}>
+                <TableCell
+                  sx={tableCellSx(columnWidths.availability, "center")}
+                >
                   <Box
                     component="img"
                     src={
