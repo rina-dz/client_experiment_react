@@ -10,12 +10,10 @@ import {
   Box,
 } from "@mui/material";
 import { MoreVert as MoreVertIcon } from "@mui/icons-material";
-import availability_one from "../../images/availability_one.svg";
-import availability_two from "../../images/availability_two.svg";
-import availability_three from "../../images/availability_three.svg";
 import sale_icon from "../../images/sale.svg";
 import hot_sale_icon from "../../images/hot_sale.svg";
 import add_icon from "../../images/add.svg";
+import { availabilityIcons } from "../../data/availabilityIcons";
 
 import {
   columnWidths,
@@ -166,7 +164,7 @@ const ProductTable = ({ products }) => {
                     src={
                       availabilityIcons.find(
                         (item) => item.value === product.availability
-                      )?.icon || availability_one
+                      )?.icon
                     }
                     sx={{ width: 20, height: 20 }}
                   />
@@ -217,11 +215,5 @@ const ProductTable = ({ products }) => {
     </Box>
   );
 };
-
-const availabilityIcons = [
-  { value: 1, icon: availability_one },
-  { value: 2, icon: availability_two },
-  { value: 3, icon: availability_three },
-];
 
 export default ProductTable;
