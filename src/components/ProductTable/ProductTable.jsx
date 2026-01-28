@@ -7,6 +7,8 @@ import {
   TableRow,
   Paper,
   Box,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 
 import {
@@ -34,6 +36,8 @@ const ProductTable = ({ products, onProductsChange }) => {
     selectedRowId,
     handleRowClick,
     clearSelection,
+    snackbar,
+    handleCloseSnackbar,
   } = useProductTable(products, onProductsChange);
 
   const headers = [
@@ -129,6 +133,20 @@ const ProductTable = ({ products, onProductsChange }) => {
           </TableBody>
         </Table>
       </TableContainer>
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

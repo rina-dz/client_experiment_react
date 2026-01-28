@@ -38,6 +38,7 @@ export const useProductTable = (products, onProductsChange) => {
     const [editingCell, setEditingCell] = useState(null);
     const [editValue, setEditValue] = useState('');
     const [selectedRowId, setSelectedRowId] = useState(null);
+    const [snackbar, setSnackbar] = useState({ open: false, message: '' });
 
     const handleHeaderClick = (field) => {
         if (!sortableFields.includes(field)) return;
@@ -96,6 +97,15 @@ export const useProductTable = (products, onProductsChange) => {
 
     const clearSelection = () => {
         setSelectedRowId(null);
+    };
+
+    const handleAddToOrder = (sku) => {
+        const message = `Товар с артикулом ${sku} добавлен в заказ!`;
+        setSnackbar({ open: true, message });
+    };
+
+    const handleCloseSnackbar = () => {
+        setSnackbar({ ...snackbar, open: false });
     };
 
     useEffect(() => {
@@ -237,8 +247,19 @@ export const useProductTable = (products, onProductsChange) => {
 
             case 'order':
                 return (
-                    <Box sx={{ padding: '14px 16px', display: 'flex', justifyContent: 'flex-end' }}>
-                        <Box component="img" src={add_icon} sx={{ width: 32, height: 32, cursor: "pointer", transition: "opacity 0.2s", "&:hover": { opacity: 0.6 } }} />
+                    <Box
+                        sx={{
+                            padding: '14px 16px',
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            cursor: "pointer",
+                        }}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            handleAddToOrder(product.sku);
+                        }}
+                    >
+                        <Box component="img" src={add_icon} sx={{ width: 32, height: 32, transition: "opacity 0.2s", "&:hover": { opacity: 0.6 } }} />
                     </Box>
                 );
 
@@ -285,5 +306,8 @@ export const useProductTable = (products, onProductsChange) => {
         selectedRowId,
         handleRowClick,
         clearSelection,
+        snackbar,
+        handleAddToOrder,
+        handleCloseSnackbar,
     };
 };
